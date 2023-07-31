@@ -1,1 +1,103 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,500;0,6..12,800;1,6..12,400&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --ff-primary: "Nunito Sans", sans-serif;
+  --ff-secondary: "Source Code Pro", monospace;
+  --fw-light: 300;
+  --fw-reg: 500;
+  --fw-bold: 800;
+  --menu-width: 230px;
+  --clr-light: #fefefe;
+  --clr-dark: #0091ff;
+  --clr-accent: #1dd4fd;
+  --fs-h1: 3rem;
+  --fs-h2: 2.25rem;
+  --fs-h3: 1.25rem;
+  --fs-body: 0.85rem;
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 800px) {
+  :root {
+    --fs-h1: 4.5rem;
+    --fs-h2: 3.75rem;
+    --fs-h3: 1.5rem;
+    --fs-body: 0.95rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--clr-light);
+  color: var(--clr-dark);
+  margin: 0;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+section {
+  padding: 5em 2em;
+}
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+strong {
+  font-weight: var(--fw-bold);
+}
+
+:focus {
+  outline: 3px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+.btn-start {
+  position: relative;
+  padding: 15px;
+  background-color: var(--clr-dark);
+  color: var(--clr-light);
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  border-radius: 25px;
+  font-family: inherit;
+  transition: background-color 0.2s ease-in-out, transform 0.1s;
+  border: none;
+  min-width: 120px;
+  max-height: 60px;
+  margin: 10px 0;
+
+  &:hover {
+    background-color: var(--clr-accent);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

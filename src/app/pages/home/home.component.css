@@ -1,0 +1,47 @@
+.intro-section {
+  height: calc(100vh -80px) !important;
+  width: 100%;
+}
+
+.logo-home {
+  margin-top: 0;
+  padding: 0;
+  height: 50%;
+  width: 50%;
+}
+
+.logo-home > img {
+  object-fit: fill;
+}
+.bubble1 {
+  position: absolute;
+  right: 2%;
+  top: 15%;
+  animation: bounce1 2s infinite;
+  z-index: -5;
+}
+.bubble2 {
+  position: absolute;
+  right: 3%;
+  top: 10%;
+  animation: bounce2 3s infinite;
+  z-index: -4;
+}
+@keyframes bounce1 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+@keyframes bounce2 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
