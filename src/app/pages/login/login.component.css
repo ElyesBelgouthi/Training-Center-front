@@ -13,35 +13,11 @@
   margin: 80px auto;
 }
 
-.form-group label {
-  font-weight: 800;
-  color: var(--clr-dark);
-}
-
-.form-group input {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  width: 100%;
-  margin-bottom: 15px;
-  font-size: 16px;
-  font-family: var(--ff-primary);
-  font-weight: 800;
-}
-
-.form-group input:focus {
-  outline: none;
-  box-shadow: 0 0 5px var(--clr-dark);
-}
-
 .btn {
-  display: block; /* or inline-block */
+  display: block;
   width: 120px;
   margin: 10px auto;
   padding: 8px;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
   cursor: pointer;
 }
 
@@ -61,13 +37,4 @@
 .icon {
   font-size: 4rem;
   margin: 15px calc(200px - 4rem);
-}
-
-input.ng-invalid.ng-touched {
-  box-shadow: 4px 4px 8px rgba(250, 5, 5, 0.695);
-}
-
-.form-helper {
-  color: #777;
-  margin-top: -3px;
 }

@@ -1,3 +1,10 @@
 .main-content {
-  margin-left: 280px;
+  margin-left: 250px;
+  min-height: 100vh;
+  min-width: calc(100vw -250px);
+  background-color: #f0f8ff;
+  padding: 20px;
+  background-image: url(../../../assets/images/bg-admin.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
