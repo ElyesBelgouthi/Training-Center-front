@@ -45,3 +45,12 @@
     transform: translateY(-20px);
   }
 }
+
+.intro-subtitle {
+  margin: 50px;
+  padding: 5px 10px;
+  background-color: var(--clr-dark);
+  color: var(--clr-light);
+  font-size: 1.7rem;
+  max-width: 60%;
+}

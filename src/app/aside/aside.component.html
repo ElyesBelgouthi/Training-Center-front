@@ -1,0 +1,58 @@
+<div class="aside-container">
+  <img
+    src="../../assets/images/logo-tiny.png"
+    alt="Horizon Data"
+    routerLink="/"
+  />
+  <hr />
+  <ul class="aside-list-items">
+    <li class="aside-item">
+      <a
+        [routerLink]="['./']"
+        [routerLinkActive]="'active-item'"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ><i class="fa-solid fa-chart-line"></i> &nbsp;Dashboard</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./profile']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-address-card"></i>&nbsp;Profile</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./settings']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-gear"></i>&nbsp;Settings</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./courses']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-book-open"></i>&nbsp;Courses</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./participants']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-graduation-cap"></i>&nbsp;Participants</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./instructors']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-chalkboard-user"></i>&nbsp;Instructors</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./accounting']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-receipt"></i>&nbsp;Accounting</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./timetable']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-calendar-days"></i>&nbsp;Timetable</a
+      >
+    </li>
+    <li class="aside-item">
+      <a [routerLink]="['./reports']" [routerLinkActive]="'active-item'"
+        ><i class="fa-solid fa-flag"></i>&nbsp;Reports</a
+      >
+    </li>
+  </ul>
+</div>

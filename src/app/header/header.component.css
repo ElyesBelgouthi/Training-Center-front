@@ -13,6 +13,7 @@
 .logo {
   height: 60px;
   object-fit: contain;
+  cursor: pointer;
 }
 
 .navbar {
@@ -20,6 +21,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   margin-right: 20px;
+  padding: 0;
 }
 
 .navbar-item-list {
@@ -28,13 +30,15 @@
   justify-content: center;
   font-size: var(--fs-h3);
   font-weight: 800;
-  margin-right: 30px;
+  margin: 0 30px;
+  padding: 15px 0;
   height: 100%;
 }
 
 .navbar-item {
-  padding: 0 10px;
-  height: 100%;
+  margin: 0;
+  padding: 20px 10px;
+  height: 80px;
   transition: background-color 0.3s ease;
 }
 
@@ -46,4 +50,8 @@
 .navbar-item:hover {
   background-color: #0091ff;
   color: #ffffff;
+}
+
+.btn {
+  margin-top: 25px;
 }
