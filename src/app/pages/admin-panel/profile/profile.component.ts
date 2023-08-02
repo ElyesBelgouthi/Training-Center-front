@@ -15,12 +15,12 @@ export class ProfileComponent implements OnInit {
     password: 'admin',
     age: 21,
     phoneNumber: 98989989,
-    profilePicture: null,
+    profilePicture: '',
   };
 
   adminForm!: FormGroup;
 
-  selectedFileName: string = 'choose';
+  selectedFileName: string = 'choose a picture';
 
   ngOnInit(): void {
     this.formInit();
@@ -41,16 +41,17 @@ export class ProfileComponent implements OnInit {
       ]),
       profilePicture: new FormControl(
         this.admin.profilePicture,
-        this.fileValidator
+        this.fileValidator.bind(this)
       ),
     });
   }
 
   fileValidator(control: any): { [message: string]: boolean } | null {
     const file = control.value;
+    const allowedExtensions = ['png', 'jpeg', 'jpg', 'gif', 'svg'];
     if (file) {
-      const fileExt = file.name.split('.').pop().toLowerCase();
-      const allowedExtensions = ['png', 'jpeg', 'jpg', 'gif', 'svg'];
+      const fileExt = file.split('.').pop().toLowerCase();
+
       if (!allowedExtensions.includes(fileExt)) {
         return { invalidFileType: true };
       }
@@ -67,7 +68,16 @@ export class ProfileComponent implements OnInit {
     if (inputElement.files && inputElement.files.length > 0) {
       this.selectedFileName = inputElement.files[0].name;
     } else {
-      this.selectedFileName = 'Choose a ';
+      this.selectedFileName = 'choose a picture';
     }
+  }
+
+  onSubmit() {
+    console.log(this.adminForm);
+  }
+
+  onReset() {
+    this.formInit();
+    this.selectedFileName = 'choose a picture';
   }
 }

@@ -1,9 +1,14 @@
 <div class="profile-container">
-  <div class="profile-image">
-    <img src="../../../../assets/images/user-solid.svg" alt="profile image" />
+  <div class="profile-header">
+    <div class="profile-image">
+      <img src="../../../../assets/images/user-solid.svg" alt="profile image" />
+    </div>
+    <div class="profile-username">
+      <h1>Welcome {{ adminForm.get("username")?.value }}</h1>
+    </div>
   </div>
   <div class="form-container">
-    <form class="form" [formGroup]="adminForm">
+    <form class="form" [formGroup]="adminForm" (ngSubmit)="onSubmit()">
       <div class="form-half">
         <div class="form-group">
           <label for="email">Email</label>
@@ -54,9 +59,14 @@
           <label
             for="profilePicture"
             class="file-label"
+            [ngClass]="{
+              'invalid-touched':
+                !adminForm.get('profilePicture')?.valid &&
+                adminForm.get('profilePicture')?.touched
+            }"
             (change)="onFileChange($event)"
           >
-            {{ selectedFileName }}
+            <i class="fa-solid fa-image"></i>&nbsp;{{ selectedFileName }}
             <input
               type="file"
               id="profilePicture"
@@ -66,11 +76,16 @@
           </label>
           <span
             class="form-helper"
-            *ngIf="
-              !adminForm.get('age')?.valid && adminForm.get('age')?.touched
-            "
-            >Please don't exceed 10MB</span
+            *ngIf="adminForm.get('profilePicture')?.hasError('invalidFileType')"
           >
+            Invalid File Type. Allowed: png, jpeg, jpg, gif, svg.
+          </span>
+          <span
+            class="form-helper"
+            *ngIf="adminForm.get('profilePicture')?.hasError('sizeExceeded')"
+          >
+            File Size Exceeded. Maximum size allowed is 10 MB.
+          </span>
         </div>
       </div>
       <div class="form-half">
@@ -123,6 +138,15 @@
             "
             >Please enter a valid age</span
           >
+        </div>
+        <div class="form-password">
+          <a>Reset your password ?</a>
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn-start btn-save">Save</button>
+          <button type="button" class="btn-start btn-reset" (click)="onReset()">
+            Reset
+          </button>
         </div>
       </div>
     </form>

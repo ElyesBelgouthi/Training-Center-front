@@ -9,22 +9,34 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   margin: 20px auto;
-  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 60px;
 }
 
 .profile-image {
   height: 20vh;
   width: 20vh;
+  max-width: 200px;
   border-radius: 50%;
   background-color: azure;
   overflow: hidden;
-  margin: 10px 0 0 20px;
 }
 
 .profile-image > img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.profile-username > h1 {
+  font-size: 4rem;
+  margin: 0;
 }
 
 .form {
@@ -37,4 +49,15 @@
 
 .form-half {
   width: 40%;
+}
+
+.form-password {
+  margin: 20px 0;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 40px;
 }
