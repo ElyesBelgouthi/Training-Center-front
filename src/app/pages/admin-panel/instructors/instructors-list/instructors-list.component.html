@@ -1,0 +1,49 @@
+<div class="flex">
+  <h1>Instructors</h1>
+  <button class="btn-start" type="button" (click)="onAddNew()">Add New</button>
+</div>
+
+<div class="search-container">
+  <input type="text" placeholder="Search..." />
+  <button><i class="fas fa-search"></i></button>
+</div>
+<div class="instructors-container">
+  <div
+    class="instructor-card"
+    *ngFor="
+      let instructor of instructors
+        | paginate : { itemsPerPage: 6, currentPage: p };
+      let i = index
+    "
+    (click)="onEdit(i + (p - 1) * 6)"
+  >
+    <div class="instructor-card-header">
+      <div class="profile-pic">
+        <img
+          src="../../../../assets/images/logo-tiny.png"
+          alt="Instructor's Picture"
+        />
+      </div>
+      <div class="actions">
+        <button class="btn-start btn-tiny" type="button">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button
+          class="btn-start btn-reset btn-tiny"
+          type="button"
+          (click)="onDelete(i + (p - 1) * 6, $event)"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="info">
+      <h2>{{ instructor.firstName }} &nbsp; {{ instructor.lastName }}</h2>
+      <p>Major: {{ instructor.major }}</p>
+    </div>
+  </div>
+</div>
+<div class="pagination">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

@@ -1,0 +1,282 @@
+<div class="profile-header">
+  <div class="profile-image">
+    <img *ngIf="imageSrc" src="{{ imageSrc }}" alt="profile image" />
+    <img
+      *ngIf="!imageSrc"
+      src="../../../../assets/images/user-solid.svg"
+      alt="profile image"
+    />
+  </div>
+  <div class="profile-username">
+    <h1>Welcome {{ instructorForm.get("firstName")?.value }}</h1>
+  </div>
+</div>
+<div class="form-container">
+  <form class="form" [formGroup]="instructorForm" (ngSubmit)="onSubmit()">
+    <div class="form-half">
+      <div class="form-flex">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+          />
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('email')?.valid &&
+              instructorForm.get('email')?.touched
+            "
+            >Please enter a valid email</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="CIN">CIN</label>
+          <input
+            type="text"
+            id="CIN"
+            class="form-control"
+            formControlName="CIN"
+          />
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('CIN')?.valid &&
+              instructorForm.get('CIN')?.touched
+            "
+            >Please enter a valid CIN</span
+          >
+        </div>
+      </div>
+      <div class="form-flex">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            formControlName="firstName"
+          />
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('firstName')?.valid &&
+              instructorForm.get('firstName')?.touched
+            "
+            >Please enter a valid name</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            formControlName="lastName"
+          />
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('lastName')?.valid &&
+              instructorForm.get('lastName')?.touched
+            "
+            >Please enter a valid name</span
+          >
+        </div>
+      </div>
+      <div class="form-flex">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="text"
+            id="phone"
+            class="form-control"
+            formControlName="phoneNumber"
+          />
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('phoneNumber')?.valid &&
+              instructorForm.get('phoneNumber')?.touched
+            "
+            >Please enter a valid phone number</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input
+            type="number"
+            id="age"
+            class="form-control"
+            formControlName="age"
+          />
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('age')?.valid &&
+              instructorForm.get('age')?.touched
+            "
+            >Please enter a valid age</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="profilePicture">Change Picture</label>
+        <label
+          for="profilePicture"
+          class="file-label"
+          [ngClass]="{
+            'invalid-touched':
+              !instructorForm.get('profilePicture')?.valid &&
+              instructorForm.get('profilePicture')?.touched
+          }"
+        >
+          <i class="fa-solid fa-image"></i>&nbsp;{{ selectedFileName }}
+          <input
+            type="file"
+            id="profilePicture"
+            class="file-input"
+            (change)="onFileChange($event)"
+          />
+        </label>
+        <span
+          class="form-helper"
+          *ngIf="
+            instructorForm.get('profilePicture')?.hasError('invalidFileType')
+          "
+        >
+          Invalid File Type. Allowed: png, jpeg, jpg, gif, svg.
+        </span>
+        <span
+          class="form-helper"
+          *ngIf="instructorForm.get('profilePicture')?.hasError('sizeExceeded')"
+        >
+          File Size Exceeded. Maximum size allowed is 10 MB.
+        </span>
+      </div>
+    </div>
+    <div class="form-half">
+      <div class="form-flex">
+        <div class="form-group">
+          <div class="form-group">
+            <label for="nationality">Nationality</label>
+            <select formControlName="nationality" id="nationality">
+              <option value="" disabled selected>Select a nationality</option>
+              <option
+                *ngFor="let nationality of nationalities"
+                [value]="nationality"
+              >
+                {{ nationality }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="form-flex">
+            <label for="male" class="form-label-radio">
+              <input
+                type="radio"
+                id="male"
+                formControlName="gender"
+                [value]="'male'"
+              />
+              Male
+            </label>
+            <label for="female" class="form-label-radio">
+              <input
+                type="radio"
+                id="female"
+                formControlName="gender"
+                [value]="'female'"
+              />
+              Female
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-flex">
+        <div class="form-group">
+          <label for="educationLevel">Highest Education Level</label>
+          <select formControlName="highestEducationLevel" id="educationLevel">
+            <option value="" disabled selected>Select a level</option>
+            <option
+              *ngFor="let level of highestEducationLevels"
+              [value]="level"
+            >
+              {{ level }}
+            </option>
+          </select>
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('highestEducationLevel')?.valid &&
+              instructorForm.get('highestEducationLevel')?.touched
+            "
+            >Please select a level</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="major">Major</label>
+          <select formControlName="major" id="major">
+            <option value="" disabled selected>Select a major</option>
+            <option *ngFor="let major of majors" [value]="major">
+              {{ major }}
+            </option>
+          </select>
+          <span
+            class="form-helper"
+            *ngIf="
+              !instructorForm.get('major')?.valid &&
+              instructorForm.get('major')?.touched
+            "
+            >Please select a major</span
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input
+          type="text"
+          id="address"
+          class="form-control"
+          formControlName="address"
+        />
+        <span
+          class="form-helper"
+          *ngIf="
+            !instructorForm.get('address')?.valid &&
+            instructorForm.get('address')?.touched
+          "
+          >Please enter a valid address</span
+        >
+      </div>
+      <div class="form-group">
+        <label for="address">Educational Institution</label>
+        <input
+          type="text"
+          id="address"
+          class="form-control"
+          formControlName="educationalInstitution"
+        />
+        <span
+          class="form-helper"
+          *ngIf="
+            !instructorForm.get('educationalInstitution')?.valid &&
+            instructorForm.get('educationalInstitution')?.touched
+          "
+          >Please enter a valid Educational Institution</span
+        >
+      </div>
+      <div class="form-buttons">
+        <button type="submit" class="btn-start btn-save">Save</button>
+        <button type="button" class="btn-start btn-reset" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 35px 60px;
+  padding: 10px 60px;
 }
 
 .profile-image {
@@ -47,4 +47,15 @@
   flex-direction: row;
   justify-content: space-around;
   padding: 0 40px;
+}
+
+.form-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  column-gap: 12px;
+}
+
+.form-flex > div {
+  flex: 1;
 }

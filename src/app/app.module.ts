@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -18,10 +19,36 @@ import { InstructorsComponent } from './pages/admin-panel/instructors/instructor
 import { AccountingComponent } from './pages/admin-panel/accounting/accounting.component';
 import { TimetableComponent } from './pages/admin-panel/timetable/timetable.component';
 import { ReportsComponent } from './pages/admin-panel/reports/reports.component';
+import { InstructorsEditComponent } from './pages/admin-panel/instructors/instructors-edit/instructors-edit.component';
+import { InstructorsListComponent } from './pages/admin-panel/instructors/instructors-list/instructors-list.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, LoginComponent, AdminPanelComponent, AsideComponent, DashboardComponent, ProfileComponent, SettingsComponent, CoursesComponent, ParticipantsComponent, InstructorsComponent, AccountingComponent, TimetableComponent, ReportsComponent],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    LoginComponent,
+    AdminPanelComponent,
+    AsideComponent,
+    DashboardComponent,
+    ProfileComponent,
+    SettingsComponent,
+    CoursesComponent,
+    ParticipantsComponent,
+    InstructorsComponent,
+    AccountingComponent,
+    TimetableComponent,
+    ReportsComponent,
+    InstructorsEditComponent,
+    InstructorsListComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

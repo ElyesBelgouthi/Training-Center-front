@@ -12,6 +12,8 @@ import { ReportsComponent } from './pages/admin-panel/reports/reports.component'
 import { SettingsComponent } from './pages/admin-panel/settings/settings.component';
 import { TimetableComponent } from './pages/admin-panel/timetable/timetable.component';
 import { InstructorsComponent } from './pages/admin-panel/instructors/instructors.component';
+import { InstructorsEditComponent } from './pages/admin-panel/instructors/instructors-edit/instructors-edit.component';
+import { InstructorsListComponent } from './pages/admin-panel/instructors/instructors-list/instructors-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,6 +45,20 @@ const routes: Routes = [
       {
         path: 'instructors',
         component: InstructorsComponent,
+        children: [
+          {
+            path: '',
+            component: InstructorsListComponent,
+          },
+          {
+            path: 'new',
+            component: InstructorsEditComponent,
+          },
+          {
+            path: ':id/edit',
+            component: InstructorsEditComponent,
+          },
+        ],
       },
       {
         path: 'reports',

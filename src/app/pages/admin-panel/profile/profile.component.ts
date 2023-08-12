@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { fileValidator } from 'src/app/shared/file.validator';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit {
     email: 'admin@admin',
     password: 'admin',
     age: 21,
-    phoneNumber: 98989989,
+    phoneNumber: '98989989',
     profilePicture: '',
   };
 
@@ -41,26 +42,9 @@ export class ProfileComponent implements OnInit {
       ]),
       profilePicture: new FormControl(
         this.admin.profilePicture,
-        this.fileValidator.bind(this)
+        fileValidator.bind(this)
       ),
     });
-  }
-
-  fileValidator(control: any): { [message: string]: boolean } | null {
-    const file = control.value;
-    const allowedExtensions = ['png', 'jpeg', 'jpg', 'gif', 'svg'];
-    if (file) {
-      const fileExt = file.split('.').pop().toLowerCase();
-
-      if (!allowedExtensions.includes(fileExt)) {
-        return { invalidFileType: true };
-      }
-      const maxSize = 10 * 1024 * 1024;
-      if (file.size > maxSize) {
-        return { sizeExceeded: true };
-      }
-    }
-    return null;
   }
 
   onFileChange(event: Event) {
