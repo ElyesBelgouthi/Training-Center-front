@@ -15,7 +15,7 @@
         | paginate : { itemsPerPage: 6, currentPage: p };
       let i = index
     "
-    (click)="onEdit(i + (p - 1) * 6)"
+    (click)="instructor?.id && onEdit(instructor.id)"
   >
     <div class="instructor-card-header">
       <div class="profile-pic">
@@ -31,7 +31,9 @@
         <button
           class="btn-start btn-reset btn-tiny"
           type="button"
-          (click)="onDelete(i + (p - 1) * 6, $event)"
+          (click)="
+            instructor?.id && onDelete(instructor.id, i + 6 * (p - 1), $event)
+          "
         >
           <i class="fa-solid fa-trash"></i>
         </button>

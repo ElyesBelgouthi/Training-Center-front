@@ -15,8 +15,9 @@ export class InstructorsEditComponent implements OnInit {
   instructorForm!: FormGroup;
   selectedFileName: string = 'choose a picture';
   editMode!: boolean;
-  id!: number;
+  id!: string;
   imageSrc!: any;
+  instructor!: Instructor;
 
   highestEducationLevels = [
     'PhD',
@@ -57,81 +58,66 @@ export class InstructorsEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
+      this.id = params['id'];
       this.editMode = params['id'] !== undefined;
-      this.initForm();
     });
-    this.imageService.getImage(1).subscribe(
-      (imageData) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.imageSrc = e.target?.result;
-        };
-        reader.readAsDataURL(imageData);
-      },
-      (error) => {
-        console.error('Error fetching image', error);
-      }
-    );
+    if (this.editMode) {
+      this.instructorsService
+        .getInstructorById(this.id)
+        .subscribe((instructor: Instructor) => {
+          this.instructor = instructor;
+          this.initForm();
+        });
+      this.imageService.getImage(this.id).subscribe(
+        (imageData) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.imageSrc = e.target?.result;
+          };
+          reader.readAsDataURL(imageData);
+        },
+        (error) => {}
+      );
+    } else {
+      this.initForm();
+    }
   }
 
   private initForm() {
-    let firstName = '';
-    let lastName = '';
-    let age = '18';
-    let gender = 'male';
-    let address = '';
-    let CIN = '';
-    let phoneNumber = '';
-    let email = '';
-    let highestEducationLevel = '';
-    let educationalInstitution = '';
-    let major = '';
-    let nationality = '';
-    let profilePicture = null;
-    if (this.editMode) {
-      const instructor: Instructor = this.instructorsService.getInstructorById(
-        this.id
-      );
-      firstName = instructor.firstName;
-      lastName = instructor.lastName;
-      age = instructor.age;
-      gender = instructor.gender;
-      address = instructor.address;
-      CIN = instructor.CIN;
-      phoneNumber = instructor.phoneNumber;
-      email = instructor.email;
-      highestEducationLevel = instructor.highestEducationLevel;
-      educationalInstitution = instructor.educationalInstitution;
-      major = instructor.major;
-      nationality = instructor.nationality;
-      profilePicture = instructor.profilePicture;
-    }
-
     this.instructorForm = new FormGroup({
-      firstName: new FormControl(firstName, [Validators.required]),
-      lastName: new FormControl(lastName, [Validators.required]),
-      age: new FormControl(age, [Validators.required]),
-      gender: new FormControl(gender, [Validators.required]),
-      address: new FormControl(address, [Validators.required]),
-      CIN: new FormControl(CIN, [Validators.required]),
-      phoneNumber: new FormControl(phoneNumber, [Validators.required]),
-      email: new FormControl(email, [Validators.required, Validators.email]),
-      highestEducationLevel: new FormControl(highestEducationLevel, [
-        Validators.required,
-      ]),
-      educationalInstitution: new FormControl(educationalInstitution, [
-        Validators.required,
-      ]),
-      major: new FormControl(major, [Validators.required]),
-      nationality: new FormControl(nationality, [Validators.required]),
-      profilePicture: new FormControl(profilePicture, [
-        Validators.required,
-        fileValidator,
-      ]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      age: new FormControl('18', [Validators.required]),
+      gender: new FormControl('male', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      CIN: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      highestEducationLevel: new FormControl('', [Validators.required]),
+      educationalInstitution: new FormControl('', [Validators.required]),
+      major: new FormControl('', [Validators.required]),
+      nationality: new FormControl('', [Validators.required]),
+      profilePicture: new FormControl(null, [fileValidator]),
     });
-  }
 
+    if (this.editMode && this.instructor) {
+      this.instructorForm.patchValue({
+        firstName: this.instructor.firstName,
+        lastName: this.instructor.lastName,
+        age: this.instructor.age,
+        gender: this.instructor.gender,
+        address: this.instructor.address,
+        CIN: this.instructor.CIN,
+        phoneNumber: this.instructor.phoneNumber,
+        email: this.instructor.email,
+        highestEducationLevel: this.instructor.highestEducationLevel,
+        educationalInstitution: this.instructor.educationalInstitution,
+        major: this.instructor.major,
+        nationality: this.instructor.nationality,
+        profilePicture: this.instructor.profilePicture,
+      });
+    }
+  }
   onFileChange(event: any) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
@@ -189,11 +175,13 @@ export class InstructorsEditComponent implements OnInit {
         );
       }
       if (this.editMode) {
-        this.instructorsService.updateInstructor(
-          this.id,
-          this.instructorForm.value
-        );
+        console.log(formData);
+        // this.instructorsService.updateInstructor(
+        //   this.id,
+        //   this.instructorForm.value
+        // );
       } else {
+        console.log(formData);
         this.instructorsService.addInstructor(formData);
       }
       this.router.navigate(['admin', 'instructors']);

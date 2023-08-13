@@ -8,11 +8,16 @@
     />
   </div>
   <div class="profile-username">
-    <h1>Welcome {{ instructorForm.get("firstName")?.value }}</h1>
+    <h1>Welcome</h1>
   </div>
 </div>
 <div class="form-container">
-  <form class="form" [formGroup]="instructorForm" (ngSubmit)="onSubmit()">
+  <form
+    *ngIf="instructorForm"
+    class="form"
+    [formGroup]="instructorForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div class="form-half">
       <div class="form-flex">
         <div class="form-group">

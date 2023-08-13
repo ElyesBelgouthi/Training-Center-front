@@ -12,7 +12,7 @@ export class InstructorsListComponent implements OnInit {
   p: number = 1;
   addingNew: boolean = false;
 
-  instructors!: Instructor[];
+  instructors: Instructor[] = [];
 
   constructor(
     private router: Router,
@@ -40,9 +40,9 @@ export class InstructorsListComponent implements OnInit {
     this.router.navigate([index, 'edit'], { relativeTo: this.route });
   }
 
-  onDelete(index: number, event: Event) {
+  onDelete(id: number, index: number, event: Event) {
     event.stopPropagation();
-    this.instructorsService.deleteInstructor(index);
-    this.router.navigate(['admin', 'instructors']);
+    this.instructorsService.deleteInstructor(id);
+    this.instructors.splice(index, 1);
   }
 }

@@ -10,7 +10,7 @@ export class ImageService {
 
   baseURL: string = `http://localhost:3000/`;
 
-  getImage(id: number): Observable<Blob> {
+  getImage(id: string): Observable<Blob> {
     const url = `${this.baseURL}instructor/photo/${id}`; //
     return this.http.get(url, { responseType: 'blob' });
   }
