@@ -21,6 +21,8 @@ import { TimetableComponent } from './pages/admin-panel/timetable/timetable.comp
 import { ReportsComponent } from './pages/admin-panel/reports/reports.component';
 import { InstructorsEditComponent } from './pages/admin-panel/instructors/instructors-edit/instructors-edit.component';
 import { InstructorsListComponent } from './pages/admin-panel/instructors/instructors-list/instructors-list.component';
+import { CoursesListComponent } from './pages/admin-panel/courses/courses-list/courses-list.component';
+import { CoursesEditComponent } from './pages/admin-panel/courses/courses-edit/courses-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { InstructorsListComponent } from './pages/admin-panel/instructors/instru
     ReportsComponent,
     InstructorsEditComponent,
     InstructorsListComponent,
+    CoursesListComponent,
+    CoursesEditComponent,
   ],
   imports: [
     BrowserModule,

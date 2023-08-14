@@ -14,6 +14,8 @@ import { TimetableComponent } from './pages/admin-panel/timetable/timetable.comp
 import { InstructorsComponent } from './pages/admin-panel/instructors/instructors.component';
 import { InstructorsEditComponent } from './pages/admin-panel/instructors/instructors-edit/instructors-edit.component';
 import { InstructorsListComponent } from './pages/admin-panel/instructors/instructors-list/instructors-list.component';
+import { CoursesListComponent } from './pages/admin-panel/courses/courses-list/courses-list.component';
+import { CoursesEditComponent } from './pages/admin-panel/courses/courses-edit/courses-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,6 +39,20 @@ const routes: Routes = [
       {
         path: 'courses',
         component: CoursesComponent,
+        children: [
+          {
+            path: '',
+            component: CoursesListComponent,
+          },
+          {
+            path: 'new',
+            component: CoursesEditComponent,
+          },
+          {
+            path: ':id/edit',
+            component: CoursesEditComponent,
+          },
+        ],
       },
       {
         path: 'participants',

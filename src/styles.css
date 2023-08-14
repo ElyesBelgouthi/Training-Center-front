@@ -155,13 +155,15 @@ strong {
 }
 
 .form-group input:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-group textarea:focus {
   outline: none;
   box-shadow: 0 0 5px var(--clr-dark);
 }
 
 input.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched {
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
   box-shadow: 4px 4px 8px rgba(250, 5, 5, 0.695);
 }
 

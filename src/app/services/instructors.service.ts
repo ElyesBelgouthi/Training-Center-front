@@ -2,14 +2,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Instructor } from '../shared/Instructor.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { InstructorInfo } from '../shared/instructor-info.model';
 
 @Injectable({ providedIn: 'root' })
 export class InstructorsService {
-  instructorsChanged: EventEmitter<Instructor[]> = new EventEmitter<
-    Instructor[]
-  >();
-  instructors!: Instructor[];
-
   baseURL: string = `http://localhost:3000/instructor`;
 
   constructor(private http: HttpClient) {}
@@ -22,10 +18,13 @@ export class InstructorsService {
     return this.http.get<Instructor>(this.baseURL + '/' + id);
   }
 
-  // updateInstructor(id: number, newData: Instructor): void {
-  //   this.instructors[id] = newData;
-  //   this.instructorsChanged.emit(this.instructors.slice());
-  // }
+  getInstructorsByMajor(major: string): Observable<InstructorInfo[]> {
+    return this.http.get<InstructorInfo[]>(this.baseURL + '/major/' + major);
+  }
+
+  updateInstructor(id: string, newData: FormData): void {
+    this.http.patch(this.baseURL + '/' + id, newData).subscribe();
+  }
 
   addInstructor(newData: FormData): void {
     this.http

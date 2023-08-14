@@ -36,17 +36,31 @@ export class InstructorsEditComponent implements OnInit {
     'Art History',
   ];
 
-  nationalities = [
-    'American',
-    'Canadian',
-    'British',
-    'Australian',
-    'German',
-    'French',
-    'Japanese',
-    'Chinese',
-    'Indian',
-    // Add more nationality options here
+  cities: string[] = [
+    'Tunis',
+    'Ariana',
+    'Ben Arous',
+    'Manouba',
+    'Nabeul',
+    'Zaghouan',
+    'Bizerte',
+    'Béja',
+    'Jendouba',
+    'Le Kef',
+    'Siliana',
+    'Kairouan',
+    'Kasserine',
+    'Sidi Bouzid',
+    'Sousse',
+    'Monastir',
+    'Mahdia',
+    'Sfax',
+    'Gafsa',
+    'Tozeur',
+    'Kébili',
+    'Gabès',
+    'Medenine',
+    'Tataouine',
   ];
 
   constructor(
@@ -87,16 +101,30 @@ export class InstructorsEditComponent implements OnInit {
     this.instructorForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      age: new FormControl('18', [Validators.required]),
+      age: new FormControl('18', [
+        Validators.required,
+        Validators.min(18),
+        Validators.max(100),
+      ]),
       gender: new FormControl('male', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-      CIN: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      CIN: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{8}$/),
+      ]),
+      phoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^(\(\+216\))?\d{8}$/),
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/),
+      ]),
       highestEducationLevel: new FormControl('', [Validators.required]),
       educationalInstitution: new FormControl('', [Validators.required]),
       major: new FormControl('', [Validators.required]),
-      nationality: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
       profilePicture: new FormControl(null, [fileValidator]),
     });
 
@@ -113,7 +141,7 @@ export class InstructorsEditComponent implements OnInit {
         highestEducationLevel: this.instructor.highestEducationLevel,
         educationalInstitution: this.instructor.educationalInstitution,
         major: this.instructor.major,
-        nationality: this.instructor.nationality,
+        city: this.instructor.city,
         profilePicture: this.instructor.profilePicture,
       });
     }
@@ -166,7 +194,7 @@ export class InstructorsEditComponent implements OnInit {
         this.instructorForm.value.educationalInstitution
       );
       formData.append('major', this.instructorForm.value.major);
-      formData.append('nationality', this.instructorForm.value.nationality);
+      formData.append('city', this.instructorForm.value.city);
 
       if (this.instructorForm.value.profilePicture instanceof File) {
         formData.append(
@@ -175,13 +203,8 @@ export class InstructorsEditComponent implements OnInit {
         );
       }
       if (this.editMode) {
-        console.log(formData);
-        // this.instructorsService.updateInstructor(
-        //   this.id,
-        //   this.instructorForm.value
-        // );
+        this.instructorsService.updateInstructor(this.id, formData);
       } else {
-        console.log(formData);
         this.instructorsService.addInstructor(formData);
       }
       this.router.navigate(['admin', 'instructors']);

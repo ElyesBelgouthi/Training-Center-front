@@ -12,7 +12,7 @@ export class Instructor {
     public highestEducationLevel: string,
     public educationalInstitution: string,
     public major: string,
-    public nationality: string,
+    public city: string,
     public profilePicture: any
   ) {}
 }
