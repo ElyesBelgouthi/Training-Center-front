@@ -16,6 +16,7 @@ import { InstructorsEditComponent } from './pages/admin-panel/instructors/instru
 import { InstructorsListComponent } from './pages/admin-panel/instructors/instructors-list/instructors-list.component';
 import { CoursesListComponent } from './pages/admin-panel/courses/courses-list/courses-list.component';
 import { CoursesEditComponent } from './pages/admin-panel/courses/courses-edit/courses-edit.component';
+import { CoursesMaterialsComponent } from './pages/admin-panel/courses/courses-edit/courses-materials/courses-materials.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,6 +53,7 @@ const routes: Routes = [
             path: ':id/edit',
             component: CoursesEditComponent,
           },
+          { path: ':id/edit/materials', component: CoursesMaterialsComponent },
         ],
       },
       {

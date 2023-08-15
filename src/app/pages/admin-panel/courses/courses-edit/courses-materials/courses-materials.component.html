@@ -1,0 +1,93 @@
+<div class="profile-header">
+  <div class="profile-username">
+    <h1>Materials</h1>
+  </div>
+  <div>
+    <button type="button" class="btn btn-start" [routerLink]="['../']">
+      Go Back
+    </button>
+  </div>
+</div>
+<div class="form-flex">
+  <div class="form-container" *ngIf="materialForm">
+    <form
+      class="form"
+      [formGroup]="materialForm"
+      (ngSubmit)="uploadMaterials()"
+    >
+      <div class="form-flex"></div>
+      <div class="form-group">
+        <label
+          for="file"
+          class="file-label"
+          [ngClass]="{
+            'invalid-touched':
+              !materialForm.get('file')?.valid &&
+              materialForm.get('file')?.touched
+          }"
+        >
+          <i class="fa-solid fa-file"></i>&nbsp;Add new Document
+          <input
+            type="file"
+            id="file"
+            class="file-input"
+            (change)="onFileChange($event)"
+          />
+        </label>
+        <span
+          class="form-helper"
+          *ngIf="materialForm.get('file')?.hasError('invalidFileType')"
+        >
+          Invalid File Type. Allowed: pdf, doc, docx, xls, xlsx.
+        </span>
+        <span
+          class="form-helper"
+          *ngIf="materialForm.get('file')?.hasError('sizeExceeded')"
+        >
+          File Size Exceeded. Maximum size allowed is 25 MB.
+        </span>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-start btn-save"
+        [disabled]="selectedFiles.length === 0"
+      >
+        Upload
+      </button>
+    </form>
+
+    <ul class="selected-files-list">
+      <li
+        *ngFor="let file of selectedFiles; let i = index"
+        class="selected-file"
+      >
+        <span>
+          <i
+            *ngIf="file.name.split('.').pop()?.toLowerCase() === 'pdf'"
+            class="fa-solid fa-file-pdf"
+          ></i>
+          <i
+            *ngIf="
+              file.name.split('.').pop()?.toLowerCase() === 'doc' ||
+              file.name.split('.').pop()?.toLowerCase() === 'docx'
+            "
+            class="fa-solid fa-file-word"
+          ></i>
+          <i
+            *ngIf="
+              file.name.split('.').pop()?.toLowerCase() === 'xls' ||
+              file.name.split('.').pop()?.toLowerCase() === 'xlsx'
+            "
+            class="fa-solid fa-file-excel"
+          ></i>
+          &nbsp;{{ file.name }}</span
+        >
+        <span class="delete-icon" (click)="removeFile(i)">
+          <i class="fas fa-trash"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div>terma</div>
+</div>

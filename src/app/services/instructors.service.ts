@@ -18,8 +18,8 @@ export class InstructorsService {
     return this.http.get<Instructor>(this.baseURL + '/' + id);
   }
 
-  getInstructorsByMajor(major: string): Observable<InstructorInfo[]> {
-    return this.http.get<InstructorInfo[]>(this.baseURL + '/major/' + major);
+  getInstructorsByMajor(major: string): Observable<Instructor[]> {
+    return this.http.get<Instructor[]>(this.baseURL + '/major/' + major);
   }
 
   updateInstructor(id: string, newData: FormData): void {

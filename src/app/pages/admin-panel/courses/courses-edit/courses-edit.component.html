@@ -2,6 +2,11 @@
   <div class="profile-username">
     <h1>Course</h1>
   </div>
+  <div *ngIf="editMode">
+    <button type="button" class="btn btn-start" (click)="onAddMaterials()">
+      Add Materials
+    </button>
+  </div>
 </div>
 <div class="form-container">
   <form
@@ -100,7 +105,7 @@
         <div class="form-group">
           <label for="startDate">Start Date</label>
           <input
-            type="datetime-local"
+            type="date"
             id="startDate"
             class="form-control"
             formControlName="startDate"
@@ -117,7 +122,7 @@
         <div class="form-group">
           <label for="endDate">End Date</label>
           <input
-            type="datetime-local"
+            type="date"
             id="endDate"
             class="form-control"
             formControlName="endDate"

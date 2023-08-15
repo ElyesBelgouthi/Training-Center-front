@@ -326,3 +326,41 @@ h1 {
   cursor: pointer;
   justify-content: center;
 }
+
+.selected-files-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  background-color: var(--clr-light);
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.selected-file:hover {
+  background-color: #e0e0e0;
+}
+
+.selected-file span:first-child {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: #f44336;
+  margin-left: 10px;
+  transition: color 0.3s;
+}
+
+.delete-icon:hover {
+  color: #d32f2f;
+}

@@ -1,0 +1,61 @@
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 60px;
+}
+
+.profile-image {
+  height: 20vh;
+  width: 20vh;
+  max-width: 200px;
+  border-radius: 50%;
+  background-color: azure;
+  overflow: hidden;
+}
+
+.profile-image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.profile-username > h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: first baseline;
+  padding: 20px 8px;
+}
+
+.form-half {
+  width: 40%;
+}
+
+.form-password {
+  margin: 20px 0;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 40px;
+}
+
+.form-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  column-gap: 12px;
+}
+
+.form-flex > div {
+  flex: 1;
+}

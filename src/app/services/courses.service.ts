@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Course } from '../shared/course.model';
+import { formatCurrency } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -29,5 +30,9 @@ export class CoursesService {
 
   deleteCourse(id: number): void {
     this.http.delete(this.baseURL + '/' + id).subscribe();
+  }
+
+  addMaterials(data: FormData, id: number) {
+    return this.http.post(this.baseURL + '/material/' + id, FormData);
   }
 }

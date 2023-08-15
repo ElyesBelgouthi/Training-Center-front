@@ -1,9 +1,9 @@
-import { R3NgModuleMetadataGlobal } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CoursesService } from 'src/app/services/courses.service';
 import { InstructorsService } from 'src/app/services/instructors.service';
+import { Instructor } from 'src/app/shared/Instructor.model';
 import { Course } from 'src/app/shared/course.model';
 import { InstructorInfo } from 'src/app/shared/instructor-info.model';
 
@@ -19,7 +19,7 @@ export class CoursesEditComponent implements OnInit {
   id!: string;
   course!: Course;
   selectedCategory!: boolean;
-  instructors!: InstructorInfo[];
+  instructors!: Instructor[];
 
   durations = [
     '2 days',
@@ -58,6 +58,12 @@ export class CoursesEditComponent implements OnInit {
       this.coursesService.getCourseById(this.id).subscribe((course: Course) => {
         this.course = course;
         this.initForm();
+        this.instructorsService
+          .getInstructorsByMajor(this.course.category)
+          .subscribe((instructors: Instructor[]) => {
+            this.instructors = instructors;
+            this.selectedCategory = true;
+          });
       });
     } else {
       this.initForm();
@@ -100,10 +106,9 @@ export class CoursesEditComponent implements OnInit {
         endDate: this.course.endDate,
         maxParticipants: this.course.maxParticipants,
         prerequisites: this.course.prerequisites,
-        materials: this.course.materials,
         registrationFee: this.course.registrationFee,
         instructorSalary: this.course.instructorSalary,
-        instructorId: this.course.instructorId,
+        instructorId: this.course.instructor.id,
       });
     }
   }
@@ -123,46 +128,6 @@ export class CoursesEditComponent implements OnInit {
     }
   }
 
-  // onFileNameChange(event: any) {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   if (inputElement.files && inputElement.files.length > 0) {
-  //     this.selectedFileName = inputElement.files[0].name;
-  //   } else {
-  //     this.selectedFileName = 'choose a picture';
-  //   }
-  // }
-
-  // onSubmit() {
-  //   const formData = new FormData();
-
-  //   if (this.courseForm.valid) {
-  //     formData.append('title', this.courseForm.value.title);
-  //     formData.append('description', this.courseForm.value.description);
-  //     formData.append('category', this.courseForm.value.category);
-  //     formData.append('duration', this.courseForm.value.duration);
-  //     formData.append('startDate', this.courseForm.value.startDate);
-  //     formData.append('endDate', this.courseForm.value.endDate);
-  //     formData.append('maxParticipants', this.courseForm.value.maxParticipants);
-  //     formData.append('prerequisites', this.courseForm.value.prerequisites);
-  //     formData.append('registrationFee', this.courseForm.value.registrationFee);
-  //     formData.append(
-  //       'instructorSalary',
-  //       this.courseForm.value.instructorSalary
-  //     );
-  //     formData.append('instructorId', this.courseForm.value.instructorId);
-
-  //     if (this.courseForm.value.materials instanceof File) {
-  //       formData.append('materials', this.courseForm.value.materials);
-  //     }
-  //     if (this.editMode) {
-  //       this.coursesService.updateCourse(this.id, formData);
-  //     } else {
-  //       this.coursesService.addCourse(formData);
-  //     }
-  //     console.log(this.courseForm);
-  //     this.router.navigate(['admin', 'courses']);
-  //   }
-  // }
   onSubmit() {
     if (this.courseForm.valid) {
       const courseData = {
@@ -190,7 +155,6 @@ export class CoursesEditComponent implements OnInit {
         this.coursesService.addCourse(courseData);
       }
 
-      console.log(this.courseForm);
       this.router.navigate(['admin', 'courses']);
     }
   }
@@ -204,7 +168,7 @@ export class CoursesEditComponent implements OnInit {
   onCategoryChange(event: any) {
     this.instructorsService
       .getInstructorsByMajor(event.target.value)
-      .subscribe((instructors: InstructorInfo[]) => {
+      .subscribe((instructors: Instructor[]) => {
         if (instructors.length > 0) {
           this.instructors = instructors;
           this.selectedCategory = true;
@@ -212,6 +176,8 @@ export class CoursesEditComponent implements OnInit {
           this.selectedCategory = false;
         }
       });
-    console.log(this.courseForm);
+  }
+  onAddMaterials() {
+    this.router.navigate(['materials'], { relativeTo: this.route });
   }
 }

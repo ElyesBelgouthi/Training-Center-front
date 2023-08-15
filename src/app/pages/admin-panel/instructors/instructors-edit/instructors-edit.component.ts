@@ -18,6 +18,7 @@ export class InstructorsEditComponent implements OnInit {
   id!: string;
   imageSrc!: any;
   instructor!: Instructor;
+  previewImage!: any;
 
   highestEducationLevels = [
     'PhD',
@@ -151,9 +152,13 @@ export class InstructorsEditComponent implements OnInit {
     if (inputElement.files && inputElement.files.length > 0) {
       const selectedFile = inputElement.files[0];
       this.selectedFileName = selectedFile.name;
+      if (this.instructorForm.get('profilePicture')?.invalid) {
+        return;
+      }
       this.instructorForm.patchValue({
         profilePicture: selectedFile,
       });
+      this.previewImage = URL.createObjectURL(selectedFile);
     } else {
       this.selectedFileName = 'choose a picture';
       this.instructorForm.patchValue({

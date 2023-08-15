@@ -11,9 +11,8 @@ export class Course {
     public endDate: Date,
     public maxParticipants: number,
     public prerequisites: string,
-    public materials: any,
     public registrationFee: number,
     public instructorSalary: number,
-    public instructorId: number
+    public instructor: Instructor
   ) {}
 }

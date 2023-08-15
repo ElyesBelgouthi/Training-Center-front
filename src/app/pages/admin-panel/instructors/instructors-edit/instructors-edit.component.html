@@ -1,11 +1,16 @@
 <div class="profile-header">
   <div class="profile-image">
-    <img *ngIf="imageSrc" src="{{ imageSrc }}" alt="profile image" />
     <img
-      *ngIf="!imageSrc"
+      *ngIf="imageSrc && !previewImage"
+      src="{{ imageSrc }}"
+      alt="profile image"
+    />
+    <img
+      *ngIf="!imageSrc && !previewImage"
       src="../../../../assets/images/user-solid.svg"
       alt="profile image"
     />
+    <img *ngIf="previewImage" [src]="previewImage" alt="profile image" />
   </div>
   <div class="profile-username">
     <h1>Instructor</h1>
