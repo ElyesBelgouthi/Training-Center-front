@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { CoursesService } from 'src/app/services/courses.service';
 import { documentValidator } from 'src/app/shared/document.validator';
+import { Material } from 'src/app/shared/material.model';
 
 @Component({
   selector: 'app-courses-materials',
@@ -18,6 +19,7 @@ export class CoursesMaterialsComponent implements OnInit {
   materialForm!: FormGroup;
   selectedFiles: File[] = [];
   id!: number;
+  courseMaterials!: Material[];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +29,12 @@ export class CoursesMaterialsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
+      this.coursesService
+        .getMaterials(this.id)
+        .subscribe((materials: Material[]) => {
+          console.log(materials);
+          this.courseMaterials = materials;
+        });
     });
     this.materialForm = new FormGroup({
       file: new FormControl(null, documentValidator),
@@ -50,18 +58,24 @@ export class CoursesMaterialsComponent implements OnInit {
   }
 
   uploadMaterials(): void {
-    const formData = new FormData();
-
     for (let i = 0; i < this.selectedFiles.length; i++) {
-      formData.append('materials', this.selectedFiles[i]);
+      const formData = new FormData();
+      formData.append('material', this.selectedFiles[i]);
+      this.coursesService
+        .addMaterial(formData, this.id)
+        .subscribe((material: Material) => {
+          this.courseMaterials.push(material);
+        });
     }
-    console.log(formData);
-    this.coursesService.addMaterials(formData, this.id).subscribe(() => {
-      console.log('Materials uploaded successfully');
-    });
+    this.selectedFiles = [];
   }
 
   removeFile(index: number) {
     this.selectedFiles.splice(index, 1);
+  }
+
+  deleteMaterial(materialId: number, index: number) {
+    this.coursesService.removeMaterial(materialId);
+    this.courseMaterials.splice(index, 1);
   }
 }

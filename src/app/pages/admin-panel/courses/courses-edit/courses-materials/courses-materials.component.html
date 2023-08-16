@@ -89,5 +89,41 @@
       </li>
     </ul>
   </div>
-  <div>terma</div>
+  <div *ngIf="!courseMaterials"></div>
+  <div *ngIf="courseMaterials">
+    <div class="profile-header">
+      <h2>Documents:</h2>
+    </div>
+    <ul class="selected-files-list">
+      <li
+        *ngFor="let file of courseMaterials; let i = index"
+        class="selected-file"
+      >
+        <span>
+          <i
+            *ngIf="file.title.split('.').pop()?.toLowerCase() === 'pdf'"
+            class="fa-solid fa-file-pdf"
+          ></i>
+          <i
+            *ngIf="
+              file.title.split('.').pop()?.toLowerCase() === 'doc' ||
+              file.title.split('.').pop()?.toLowerCase() === 'docx'
+            "
+            class="fa-solid fa-file-word"
+          ></i>
+          <i
+            *ngIf="
+              file.title.split('.').pop()?.toLowerCase() === 'xls' ||
+              file.title.split('.').pop()?.toLowerCase() === 'xlsx'
+            "
+            class="fa-solid fa-file-excel"
+          ></i>
+          &nbsp;{{ file.title }}</span
+        >
+        <span class="delete-icon" (click)="deleteMaterial(file.id, i)">
+          <i class="fas fa-trash"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
 </div>

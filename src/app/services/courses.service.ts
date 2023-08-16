@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Course } from '../shared/course.model';
 import { formatCurrency } from '@angular/common';
+import { Material } from '../shared/material.model';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -32,7 +33,15 @@ export class CoursesService {
     this.http.delete(this.baseURL + '/' + id).subscribe();
   }
 
-  addMaterials(data: FormData, id: number) {
-    return this.http.post(this.baseURL + '/material/' + id, FormData);
+  addMaterial(data: FormData, id: number): Observable<Material> {
+    return this.http.post<Material>(this.baseURL + '/material/' + id, data);
+  }
+
+  getMaterials(id: number) {
+    return this.http.get<Material[]>(this.baseURL + '/material/' + id);
+  }
+
+  removeMaterial(materialId: number): void {
+    this.http.delete(this.baseURL + '/material/' + materialId).subscribe();
   }
 }
