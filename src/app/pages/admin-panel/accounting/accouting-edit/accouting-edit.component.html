@@ -36,6 +36,7 @@
               id="deposit"
               formControlName="type"
               [value]="'deposit'"
+              (change)="onTypeChange('deposit')"
             />
             Deposit
           </label>
@@ -45,6 +46,7 @@
               id="withdraw"
               formControlName="type"
               [value]="'withdraw'"
+              (change)="onTypeChange('withdraw')"
             />
             Withdraw
           </label>

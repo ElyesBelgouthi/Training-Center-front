@@ -31,6 +31,7 @@ import { NameFilterPipe } from './pipes/name-filter.pipe';
 import { TitleFilterPipe } from './pipes/title-filter.pipe';
 import { AccoutingListComponent } from './pages/admin-panel/accounting/accouting-list/accouting-list.component';
 import { AccoutingEditComponent } from './pages/admin-panel/accounting/accouting-edit/accouting-edit.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { AccoutingEditComponent } from './pages/admin-panel/accounting/accouting
     TitleFilterPipe,
     AccoutingListComponent,
     AccoutingEditComponent,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,

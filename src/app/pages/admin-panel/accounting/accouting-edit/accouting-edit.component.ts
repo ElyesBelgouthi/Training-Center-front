@@ -46,6 +46,7 @@ export class AccoutingEditComponent implements OnInit {
     if (this.editMode) {
       this.billsService.getBillById(this.id).subscribe((bill: Bill) => {
         this.bill = bill;
+        this.deposit = this.bill.type === 'deposit';
         this.initForm();
       });
     } else {
@@ -108,19 +109,10 @@ export class AccoutingEditComponent implements OnInit {
 
   onCancel() {
     this.billForm.reset();
-    this.router.navigate(['admin', 'bills']);
+    this.router.navigate(['admin', 'accounting']);
   }
 
-  onCategoryChange(event: any) {
-    // this.bills
-    //   .getInstructorsByMajor(event.target.value)
-    //   .subscribe((instructors: Instructor[]) => {
-    //     if (instructors.length > 0) {
-    //       this.instructors = instructors;
-    //       this.selectedCategory = true;
-    //     } else {
-    //       this.selectedCategory = false;
-    //     }
-    //   });
+  onTypeChange(event: string) {
+    this.deposit = event === 'deposit';
   }
 }
