@@ -24,6 +24,13 @@ import { InstructorsListComponent } from './pages/admin-panel/instructors/instru
 import { CoursesListComponent } from './pages/admin-panel/courses/courses-list/courses-list.component';
 import { CoursesEditComponent } from './pages/admin-panel/courses/courses-edit/courses-edit.component';
 import { CoursesMaterialsComponent } from './pages/admin-panel/courses/courses-edit/courses-materials/courses-materials.component';
+import { ParticipantsListComponent } from './pages/admin-panel/participants/participants-list/participants-list.component';
+import { ParticipantsEditComponent } from './pages/admin-panel/participants/participants-edit/participants-edit.component';
+import { CoursesParticipantsComponent } from './pages/admin-panel/courses/courses-edit/courses-participants/courses-participants.component';
+import { NameFilterPipe } from './pipes/name-filter.pipe';
+import { TitleFilterPipe } from './pipes/title-filter.pipe';
+import { AccoutingListComponent } from './pages/admin-panel/accounting/accouting-list/accouting-list.component';
+import { AccoutingEditComponent } from './pages/admin-panel/accounting/accouting-edit/accouting-edit.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +54,13 @@ import { CoursesMaterialsComponent } from './pages/admin-panel/courses/courses-e
     CoursesListComponent,
     CoursesEditComponent,
     CoursesMaterialsComponent,
+    ParticipantsListComponent,
+    ParticipantsEditComponent,
+    CoursesParticipantsComponent,
+    NameFilterPipe,
+    TitleFilterPipe,
+    AccoutingListComponent,
+    AccoutingEditComponent,
   ],
   imports: [
     BrowserModule,

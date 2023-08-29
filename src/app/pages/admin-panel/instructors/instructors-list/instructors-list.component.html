@@ -4,7 +4,7 @@
 </div>
 
 <div class="search-container">
-  <input type="text" placeholder="Search..." />
+  <input type="text" placeholder="Search..." (input)="onSearch($event)" />
   <button><i class="fas fa-search"></i></button>
 </div>
 <div class="instructors-container">
@@ -12,6 +12,7 @@
     class="instructor-card"
     *ngFor="
       let instructor of instructors
+        | nameFilter : searchText
         | paginate : { itemsPerPage: 6, currentPage: p };
       let i = index
     "

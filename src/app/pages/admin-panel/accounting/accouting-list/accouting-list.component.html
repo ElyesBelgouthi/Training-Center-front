@@ -1,0 +1,43 @@
+<div class="flex">
+  <h1>Accounting</h1>
+  <button class="btn-start" type="button" (click)="onAddNew()">Add New</button>
+</div>
+
+<div class="search-container">
+  <input type="text" placeholder="Search..." (input)="onSearch($event)" />
+  <button><i class="fas fa-search"></i></button>
+</div>
+<div class="bill-list-header">
+  <h3>Title</h3>
+  <h3>Date</h3>
+  <h3>Amount</h3>
+</div>
+<div class="bill-list">
+  <div
+    [ngClass]="bill.type === 'deposit' ? 'bill-deposit' : 'bill-withdraw'"
+    class="bill-card"
+    (click)="onEdit(bill.id)"
+    *ngFor="
+      let bill of bills
+        | titleFilter : searchText
+        | paginate : { itemsPerPage: 6, currentPage: p };
+      let i = index
+    "
+  >
+    <div class="bill-info">
+      <h3 class="bill-title">{{ bill.title }}</h3>
+      <p class="bill-date">{{ bill.date }}</p>
+      <p class="bill-amount">{{ bill.amount }}</p>
+    </div>
+    <button
+      class="delete-button"
+      (click)="onDelete(bill.id, i + 6 * (p - 1), $event)"
+    >
+      <i class="fa-trash fa-solid"></i>
+    </button>
+  </div>
+</div>
+
+<div class="pagination">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

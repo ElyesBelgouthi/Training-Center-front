@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Course } from '../shared/course.model';
 import { formatCurrency } from '@angular/common';
 import { Material } from '../shared/material.model';
+import { Participant } from '../shared/participant.model';
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
@@ -37,11 +38,39 @@ export class CoursesService {
     return this.http.post<Material>(this.baseURL + '/material/' + id, data);
   }
 
+  downloadMaterial(id: number) {
+    return this.http.get(this.baseURL + '/file/' + id, {
+      responseType: 'blob',
+    });
+  }
+
   getMaterials(id: number) {
     return this.http.get<Material[]>(this.baseURL + '/material/' + id);
   }
 
   removeMaterial(materialId: number): void {
     this.http.delete(this.baseURL + '/material/' + materialId).subscribe();
+  }
+
+  addParticipantToCourse(
+    courseId: number,
+    participantId: number
+  ): Observable<Participant> {
+    return this.http.post<Participant>(
+      `${this.baseURL}/${courseId}/participant/${participantId}`,
+      {}
+    );
+  }
+
+  getParticipantsForCourse(courseId: number): Observable<Participant[]> {
+    return this.http.get<Participant[]>(
+      `${this.baseURL}/${courseId}/participant`
+    );
+  }
+
+  deleteParticipantsForCourse(courseId: number, participantId: number): void {
+    this.http
+      .delete(`${this.baseURL}/${courseId}/participant/${participantId}`)
+      .subscribe();
   }
 }

@@ -3,6 +3,13 @@
     <h1>Course</h1>
   </div>
   <div *ngIf="editMode">
+    <button
+      type="button"
+      class="btn btn-start btn-participants"
+      (click)="onAddParticipants()"
+    >
+      Add Participants
+    </button>
     <button type="button" class="btn btn-start" (click)="onAddMaterials()">
       Add Materials
     </button>
@@ -64,41 +71,6 @@
           >Please enter valid prerequisites</span
         >
       </div>
-
-      <!-- <div class="form-group">
-        <label for="profilePicture">Change Picture</label>
-        <label
-          for="profilePicture"
-          class="file-label"
-          [ngClass]="{
-            'invalid-touched':
-              !instructorForm.get('profilePicture')?.valid &&
-              instructorForm.get('profilePicture')?.touched
-          }"
-        >
-          <i class="fa-solid fa-image"></i>&nbsp;{{ selectedFileName }}
-          <input
-            type="file"
-            id="profilePicture"
-            class="file-input"
-            (change)="onFileChange($event)"
-          />
-        </label>
-        <span
-          class="form-helper"
-          *ngIf="
-            instructorForm.get('profilePicture')?.hasError('invalidFileType')
-          "
-        >
-          Invalid File Type. Allowed: png, jpeg, jpg, gif, svg.
-        </span>
-        <span
-          class="form-helper"
-          *ngIf="instructorForm.get('profilePicture')?.hasError('sizeExceeded')"
-        >
-          File Size Exceeded. Maximum size allowed is 10 MB.
-        </span>
-      </div> -->
     </div>
     <div class="form-half">
       <div class="form-flex">
@@ -126,6 +98,7 @@
             id="endDate"
             class="form-control"
             formControlName="endDate"
+            [min]="courseForm.get('startDate')?.value"
           />
           <span
             class="form-helper"
@@ -137,6 +110,12 @@
           >
         </div>
       </div>
+      <span
+        class="form-helper"
+        *ngIf="courseForm.errors?.['endDateBeforeStartDate']"
+      >
+        End Date must be after Start Date.</span
+      >
       <div class="form-flex">
         <div class="form-group">
           <label for="maxParticipants">Max Participants</label>

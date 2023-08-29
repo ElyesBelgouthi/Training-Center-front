@@ -98,6 +98,7 @@
       <li
         *ngFor="let file of courseMaterials; let i = index"
         class="selected-file"
+        (click)="downloadMaterial(file.id)"
       >
         <span>
           <i

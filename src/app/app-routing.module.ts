@@ -17,6 +17,11 @@ import { InstructorsListComponent } from './pages/admin-panel/instructors/instru
 import { CoursesListComponent } from './pages/admin-panel/courses/courses-list/courses-list.component';
 import { CoursesEditComponent } from './pages/admin-panel/courses/courses-edit/courses-edit.component';
 import { CoursesMaterialsComponent } from './pages/admin-panel/courses/courses-edit/courses-materials/courses-materials.component';
+import { ParticipantsListComponent } from './pages/admin-panel/participants/participants-list/participants-list.component';
+import { ParticipantsEditComponent } from './pages/admin-panel/participants/participants-edit/participants-edit.component';
+import { CoursesParticipantsComponent } from './pages/admin-panel/courses/courses-edit/courses-participants/courses-participants.component';
+import { AccoutingListComponent } from './pages/admin-panel/accounting/accouting-list/accouting-list.component';
+import { AccoutingEditComponent } from './pages/admin-panel/accounting/accouting-edit/accouting-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,6 +41,20 @@ const routes: Routes = [
       {
         path: 'accounting',
         component: AccountingComponent,
+        children: [
+          {
+            path: '',
+            component: AccoutingListComponent,
+          },
+          {
+            path: 'new',
+            component: AccoutingEditComponent,
+          },
+          {
+            path: ':id/edit',
+            component: AccoutingEditComponent,
+          },
+        ],
       },
       {
         path: 'courses',
@@ -54,11 +73,29 @@ const routes: Routes = [
             component: CoursesEditComponent,
           },
           { path: ':id/edit/materials', component: CoursesMaterialsComponent },
+          {
+            path: ':id/edit/participants',
+            component: CoursesParticipantsComponent,
+          },
         ],
       },
       {
         path: 'participants',
         component: ParticipantsComponent,
+        children: [
+          {
+            path: '',
+            component: ParticipantsListComponent,
+          },
+          {
+            path: 'new',
+            component: ParticipantsEditComponent,
+          },
+          {
+            path: ':id/edit',
+            component: ParticipantsEditComponent,
+          },
+        ],
       },
       {
         path: 'instructors',

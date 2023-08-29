@@ -1,0 +1,61 @@
+<div class="profile-header">
+  <div class="profile-username">
+    <h1>Participants</h1>
+  </div>
+  <div>
+    <button type="button" class="btn btn-start" [routerLink]="['../']">
+      Go Back
+    </button>
+  </div>
+</div>
+<div class="form-flex">
+  <div class="form-container" *ngIf="ready">
+    <div class="search-container">
+      <input type="text" placeholder="Search..." (input)="onSearch($event)" />
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <ul class="selected-files-list">
+      <li
+        *ngFor="
+          let participant of participants | nameFilter : searchText;
+          let i = index
+        "
+        class="selected-file"
+      >
+        <span>
+          &nbsp;{{ participant.firstName }}&nbsp;{{
+            participant.lastName
+          }}</span
+        >
+        <span class="add-icon" (click)="onAddParticipant(participant.id, i)">
+          <i class="fa-solid fa-user-plus"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!courseParticipants"></div>
+  <div *ngIf="courseParticipants">
+    <div class="profile-header">
+      <h2>Current Participants:</h2>
+    </div>
+    <ul class="selected-files-list">
+      <li
+        *ngFor="let participant of courseParticipants; let i = index"
+        class="selected-file"
+      >
+        <span>
+          <i class="fa-solid fa-user-plus"></i>
+          &nbsp;{{ participant.firstName }}&nbsp;{{
+            participant.lastName
+          }}</span
+        >
+        <span
+          class="delete-icon"
+          (click)="onDeleteParticipant(participant.id, i)"
+        >
+          <i class="fas fa-trash"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

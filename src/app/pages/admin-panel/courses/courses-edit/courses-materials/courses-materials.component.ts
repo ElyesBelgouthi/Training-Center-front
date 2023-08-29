@@ -74,6 +74,18 @@ export class CoursesMaterialsComponent implements OnInit {
     this.selectedFiles.splice(index, 1);
   }
 
+  downloadMaterial(id: number) {
+    this.coursesService.downloadMaterial(id).subscribe((data: Blob) => {
+      const fileUrl = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = 'Material_' + id;
+      link.click();
+
+      window.URL.revokeObjectURL(fileUrl);
+    });
+  }
+
   deleteMaterial(materialId: number, index: number) {
     this.coursesService.removeMaterial(materialId);
     this.courseMaterials.splice(index, 1);

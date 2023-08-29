@@ -83,7 +83,7 @@ export class InstructorsEditComponent implements OnInit {
           this.instructor = instructor;
           this.initForm();
         });
-      this.imageService.getImage(this.id).subscribe(
+      this.imageService.getImage(this.id, 'instructor').subscribe(
         (imageData) => {
           const reader = new FileReader();
           reader.onload = (e) => {

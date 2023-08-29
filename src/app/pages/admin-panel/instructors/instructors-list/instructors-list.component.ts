@@ -11,6 +11,7 @@ import { Instructor } from 'src/app/shared/Instructor.model';
 export class InstructorsListComponent implements OnInit {
   p: number = 1;
   addingNew: boolean = false;
+  searchText!: string;
 
   instructors: Instructor[] = [];
 
@@ -44,5 +45,9 @@ export class InstructorsListComponent implements OnInit {
     event.stopPropagation();
     this.instructorsService.deleteInstructor(id);
     this.instructors.splice(index, 1);
+  }
+
+  onSearch(event: any) {
+    this.searchText = event.target?.value;
   }
 }

@@ -1,5 +1,5 @@
 <div class="flex">
-  <h1>Courses</h1>
+  <h1>Participants</h1>
   <button class="btn-start" type="button" (click)="onAddNew()">Add New</button>
 </div>
 
@@ -11,18 +11,18 @@
   <div
     class="instructor-card"
     *ngFor="
-      let course of courses
-        | titleFilter : searchText
+      let participant of participants
+        | nameFilter : searchText
         | paginate : { itemsPerPage: 6, currentPage: p };
       let i = index
     "
-    (click)="course?.id && onEdit(course.id)"
+    (click)="participant?.id && onEdit(participant.id)"
   >
     <div class="instructor-card-header">
       <div class="profile-pic">
         <img
           src="../../../../assets/images/logo-tiny.png"
-          alt="Instructor's Picture"
+          alt="participant's Picture"
         />
       </div>
       <div class="actions">
@@ -32,7 +32,9 @@
         <button
           class="btn-start btn-reset btn-tiny"
           type="button"
-          (click)="course?.id && onDelete(course.id, i + 6 * (p - 1), $event)"
+          (click)="
+            participant?.id && onDelete(participant.id, i + 6 * (p - 1), $event)
+          "
         >
           <i class="fa-solid fa-trash"></i>
         </button>
@@ -40,8 +42,8 @@
     </div>
 
     <div class="info">
-      <h2>{{ course.title }}</h2>
-      <p>Category: {{ course.category }}</p>
+      <h2>{{ participant.firstName }} &nbsp; {{ participant.lastName }}</h2>
+      <p>Occupation: {{ participant.occupation }}</p>
     </div>
   </div>
 </div>

@@ -1,34 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoursesService } from 'src/app/services/courses.service';
-import { Course } from 'src/app/shared/course.model';
+import { ParticipantsService } from 'src/app/services/participants.service';
+import { Participant } from 'src/app/shared/participant.model';
 
 @Component({
-  selector: 'app-courses-list',
-  templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.css'],
+  selector: 'app-participants-list',
+  templateUrl: './participants-list.component.html',
+  styleUrls: ['./participants-list.component.css'],
 })
-export class CoursesListComponent implements OnInit {
+export class ParticipantsListComponent implements OnInit {
   p: number = 1;
   addingNew: boolean = false;
   searchText!: string;
-  courses: Course[] = [];
+
+  participants: Participant[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private coursesService: CoursesService
+    private participantsService: ParticipantsService
   ) {}
 
   ngOnInit(): void {
-    this.coursesService.getCourses().subscribe(
-      (courses: Course[]) => {
-        this.courses = courses;
-      },
-      (error) => {
-        console.error('Error fetching courses', error);
-      }
-    );
+    this.participantsService
+      .getParticipants()
+      .subscribe((participants: Participant[]) => {
+        this.participants = participants;
+      });
   }
 
   onAddNew() {
@@ -42,10 +40,9 @@ export class CoursesListComponent implements OnInit {
 
   onDelete(id: number, index: number, event: Event) {
     event.stopPropagation();
-    this.coursesService.deleteCourse(id);
-    this.courses.splice(index, 1);
+    this.participantsService.deleteParticipant(id);
+    this.participants.splice(index, 1);
   }
-
   onSearch(event: any) {
     this.searchText = event.target?.value;
   }

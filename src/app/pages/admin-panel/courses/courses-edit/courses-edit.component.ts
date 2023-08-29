@@ -5,7 +5,7 @@ import { CoursesService } from 'src/app/services/courses.service';
 import { InstructorsService } from 'src/app/services/instructors.service';
 import { Instructor } from 'src/app/shared/Instructor.model';
 import { Course } from 'src/app/shared/course.model';
-import { InstructorInfo } from 'src/app/shared/instructor-info.model';
+import { endDateAfterStartDateValidator } from 'src/app/shared/dates.validator';
 
 @Component({
   selector: 'app-courses-edit',
@@ -71,29 +71,32 @@ export class CoursesEditComponent implements OnInit {
   }
 
   private initForm() {
-    this.courseForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      category: new FormControl('', [Validators.required]),
-      duration: new FormControl('', [Validators.required]),
-      startDate: new FormControl('', [Validators.required]),
-      endDate: new FormControl('', [Validators.required]),
-      maxParticipants: new FormControl('', [
-        Validators.required,
-        Validators.min(1),
-      ]),
-      prerequisites: new FormControl(''),
-      materials: new FormControl(null),
-      registrationFee: new FormControl('', [
-        Validators.required,
-        Validators.min(0),
-      ]),
-      instructorSalary: new FormControl('', [
-        Validators.required,
-        Validators.min(0),
-      ]),
-      instructorId: new FormControl('', [Validators.required]),
-    });
+    this.courseForm = new FormGroup(
+      {
+        title: new FormControl('', [Validators.required]),
+        description: new FormControl('', [Validators.required]),
+        category: new FormControl('', [Validators.required]),
+        duration: new FormControl('', [Validators.required]),
+        startDate: new FormControl('', [Validators.required]),
+        endDate: new FormControl('', [Validators.required]),
+        maxParticipants: new FormControl('', [
+          Validators.required,
+          Validators.min(1),
+        ]),
+        prerequisites: new FormControl(''),
+        materials: new FormControl(null),
+        registrationFee: new FormControl('', [
+          Validators.required,
+          Validators.min(0),
+        ]),
+        instructorSalary: new FormControl('', [
+          Validators.required,
+          Validators.min(0),
+        ]),
+        instructorId: new FormControl('', [Validators.required]),
+      },
+      { validators: endDateAfterStartDateValidator() }
+    );
 
     if (this.editMode && this.course) {
       this.courseForm.patchValue({
@@ -179,5 +182,9 @@ export class CoursesEditComponent implements OnInit {
   }
   onAddMaterials() {
     this.router.navigate(['materials'], { relativeTo: this.route });
+  }
+
+  onAddParticipants() {
+    this.router.navigate(['participants'], { relativeTo: this.route });
   }
 }

@@ -282,7 +282,7 @@ textarea.ng-invalid.ng-touched {
   display: flex;
   align-items: center;
   position: relative;
-  margin-left: 800px;
+  margin-left: 80px;
   padding: 5px;
   max-width: 350px;
 }
@@ -364,4 +364,15 @@ h1 {
 
 .delete-icon:hover {
   color: #d32f2f;
+}
+
+.add-icon {
+  cursor: pointer;
+  color: var(--clr-dark);
+  margin-left: 10px;
+  transition: color 0.3s;
+}
+
+.add-icon:hover {
+  color: var(--clr-accent);
 }
