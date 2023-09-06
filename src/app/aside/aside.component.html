@@ -19,11 +19,7 @@
         ><i class="fa-solid fa-address-card"></i>&nbsp;Profile</a
       >
     </li>
-    <li class="aside-item">
-      <a [routerLink]="['./settings']" [routerLinkActive]="'active-item'"
-        ><i class="fa-solid fa-gear"></i>&nbsp;Settings</a
-      >
-    </li>
+
     <li class="aside-item">
       <a [routerLink]="['./courses']" [routerLinkActive]="'active-item'"
         ><i class="fa-solid fa-book-open"></i>&nbsp;Courses</a
@@ -55,7 +51,7 @@
       >
     </li>
   </ul>
-  <button type="button" class="btn-start btn">
+  <button type="button" class="btn-start btn" (click)="logout()">
     Logout <i class="fa-solid fa-right-from-bracket"></i>
   </button>
 </div>

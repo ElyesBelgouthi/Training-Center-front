@@ -108,7 +108,7 @@ export class ParticipantsEditComponent implements OnInit {
     'Administration',
   ];
 
-  occupations: string[] = ['Student', 'employee', 'unemployed'];
+  occupations: string[] = ['student', 'employee', 'unemployed'];
 
   constructor(
     private route: ActivatedRoute,

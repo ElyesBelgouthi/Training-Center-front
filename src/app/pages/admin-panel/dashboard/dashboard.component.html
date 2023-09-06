@@ -1,1 +1,102 @@
-<p>dashboard works!</p>
+<div class="subadmin-container">
+  <div class="flex">
+    <h1>Dashboard</h1>
+    <div class="form-group">
+      <select id="major" (change)="onChangeTime($event)">
+        <option *ngFor="let time of times">
+          {{ time["key"] }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <div class="dashboard-widget">
+      <div class="widget deposit-widget">
+        <h2>Deposits</h2>
+        <p id="deposit">0</p>
+      </div>
+      <div class="widget withdraw-widget">
+        <h2>Withdrawals</h2>
+        <p id="withdraw">0</p>
+      </div>
+      <div class="widget benefit-widget">
+        <h2>Total Benefits</h2>
+        <p id="benefit">0</p>
+      </div>
+      <div class="widget participant-widget">
+        <h2>Current Participants</h2>
+        <p id="participant">0</p>
+      </div>
+    </div>
+    <div class="flex">
+      <div *ngIf="firstChart" class="dashboard-chart">
+        <canvas
+          baseChart
+          width="100"
+          height="100"
+          type="doughnut"
+          [data]="firstChart"
+          [options]="initChartOptions('Types of Participants')"
+        >
+        </canvas>
+      </div>
+      <div *ngIf="secondChart" class="dashboard-linechart">
+        <canvas
+          baseChart
+          width="600"
+          height="200"
+          type="line"
+          [data]="secondChart"
+          [options]="initChartOptions('Most Participant Majors')"
+        >
+        </canvas>
+      </div>
+      <div *ngIf="thirdChart" class="dashboard-chart">
+        <canvas
+          baseChart
+          width="100"
+          height="100"
+          type="radar"
+          [data]="thirdChart"
+          [options]="initChartOptions('Instructors Levels')"
+        >
+        </canvas>
+      </div>
+    </div>
+    <div class="flex">
+      <div *ngIf="fourthChart" class="dashboard-chart">
+        <canvas
+          baseChart
+          width="100"
+          height="100"
+          type="polarArea"
+          [data]="fourthChart"
+          [options]="initChartOptions('Instructors Genders')"
+        >
+        </canvas>
+      </div>
+      <div *ngIf="fifthChart" class="dashboard-linechart">
+        <canvas
+          baseChart
+          width="600"
+          height="200"
+          type="bar"
+          [data]="fifthChart"
+          [options]="initChartOptions('Courses with the Most Participants')"
+        >
+        </canvas>
+      </div>
+      <div *ngIf="sixthChart" class="dashboard-chart">
+        <canvas
+          baseChart
+          width="100"
+          height="100"
+          type="pie"
+          [data]="sixthChart"
+          [options]="initChartOptions('Courses By Category')"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

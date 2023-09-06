@@ -9,7 +9,7 @@ import { AccountingComponent } from './pages/admin-panel/accounting/accounting.c
 import { CoursesComponent } from './pages/admin-panel/courses/courses.component';
 import { ParticipantsComponent } from './pages/admin-panel/participants/participants.component';
 import { ReportsComponent } from './pages/admin-panel/reports/reports.component';
-import { SettingsComponent } from './pages/admin-panel/settings/settings.component';
+
 import { TimetableComponent } from './pages/admin-panel/timetable/timetable.component';
 import { InstructorsComponent } from './pages/admin-panel/instructors/instructors.component';
 import { InstructorsEditComponent } from './pages/admin-panel/instructors/instructors-edit/instructors-edit.component';
@@ -22,6 +22,7 @@ import { ParticipantsEditComponent } from './pages/admin-panel/participants/part
 import { CoursesParticipantsComponent } from './pages/admin-panel/courses/courses-edit/courses-participants/courses-participants.component';
 import { AccoutingListComponent } from './pages/admin-panel/accounting/accouting-list/accouting-list.component';
 import { AccoutingEditComponent } from './pages/admin-panel/accounting/accouting-edit/accouting-edit.component';
+import { authGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminPanelComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -119,15 +121,16 @@ const routes: Routes = [
         path: 'reports',
         component: ReportsComponent,
       },
-      {
-        path: 'settings',
-        component: SettingsComponent,
-      },
+
       {
         path: 'timetable',
         component: TimetableComponent,
       },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: '/',
   },
 ];
 

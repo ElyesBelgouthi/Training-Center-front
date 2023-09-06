@@ -12,7 +12,7 @@ import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { AsideComponent } from './aside/aside.component';
 import { DashboardComponent } from './pages/admin-panel/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/admin-panel/profile/profile.component';
-import { SettingsComponent } from './pages/admin-panel/settings/settings.component';
+
 import { CoursesComponent } from './pages/admin-panel/courses/courses.component';
 import { ParticipantsComponent } from './pages/admin-panel/participants/participants.component';
 import { InstructorsComponent } from './pages/admin-panel/instructors/instructors.component';
@@ -33,6 +33,8 @@ import { AccoutingListComponent } from './pages/admin-panel/accounting/accouting
 import { AccoutingEditComponent } from './pages/admin-panel/accounting/accouting-edit/accouting-edit.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 
+import { NgChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     AsideComponent,
     DashboardComponent,
     ProfileComponent,
-    SettingsComponent,
+
     CoursesComponent,
     ParticipantsComponent,
     InstructorsComponent,
@@ -70,6 +72,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     ReactiveFormsModule,
     NgxPaginationModule,
     HttpClientModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

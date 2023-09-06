@@ -1,12 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'truncate'
+  name: 'truncate',
 })
 export class TruncatePipe implements PipeTransform {
-
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: string): string {
+    if (value.length <= 6) {
+      return value;
+    } else {
+      return value.slice(0, 6) + '...';
+    }
   }
-
 }

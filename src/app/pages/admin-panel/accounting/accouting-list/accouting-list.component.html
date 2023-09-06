@@ -25,7 +25,7 @@
     "
   >
     <div class="bill-info">
-      <h3 class="bill-title">{{ bill.title }}</h3>
+      <h3 class="bill-title">{{ bill.title | truncate }}</h3>
       <p class="bill-date">{{ bill.date }}</p>
       <p class="bill-amount">{{ bill.amount }}</p>
     </div>

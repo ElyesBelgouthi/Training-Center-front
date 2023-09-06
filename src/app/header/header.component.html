@@ -2,12 +2,32 @@
   <img src="assets/images/logo-tiny.png" class="logo" routerLink="" />
   <nav class="navbar">
     <ul class="navbar-item-list">
-      <li class="navbar-item"><a>Courses</a></li>
-      <li class="navbar-item"><a>Instructors</a></li>
-      <li class="navbar-item"><a>About Us</a></li>
+      <li class="navbar-item" [routerLink]="['/admin/']"><a>Dashboard</a></li>
+      <li class="navbar-item" [routerLink]="['/admin/courses']">
+        <a>Courses</a>
+      </li>
+      <li class="navbar-item" [routerLink]="['/admin/instructors']">
+        <a>Instructors</a>
+      </li>
+      <li class="navbar-item" [routerLink]="['/admin/participants']">
+        <a>Participants</a>
+      </li>
     </ul>
-    <button class="btn btn-start" type="button" routerLink="login">
-      Start Now
+    <button
+      class="btn btn-start"
+      type="button"
+      routerLink="login"
+      *ngIf="!isLoggedIn"
+    >
+      Login
+    </button>
+    <button
+      class="btn btn-start"
+      type="button"
+      (click)="logout()"
+      *ngIf="isLoggedIn"
+    >
+      Logout
     </button>
   </nav>
 </header>

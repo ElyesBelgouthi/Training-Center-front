@@ -23,7 +23,7 @@
               "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/countup.js/dist/countUp.min.js"]
           },
           "configurations": {
             "production": {
@@ -77,7 +77,7 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "scripts": []
+            "scripts": ["node_modules/countup.js/dist/countUp.min.js"]
           }
         }
       }

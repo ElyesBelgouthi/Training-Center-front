@@ -15,6 +15,7 @@ export class AccoutingEditComponent implements OnInit {
   id!: string;
   bill!: Bill;
   deposit: boolean = true;
+  currentDate: string = new Date().toISOString().split('T')[0];
 
   statuss = ['IN_PROGRESS', 'DONE'];
 

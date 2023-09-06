@@ -1,7 +1,17 @@
-<div class="subadmin-container">
+<div *ngIf="adminForm" class="subadmin-container">
   <div class="profile-header">
     <div class="profile-image">
-      <img src="../../../../assets/images/user-solid.svg" alt="profile image" />
+      <img
+        *ngIf="imageSrc && !previewImage"
+        src="{{ imageSrc }}"
+        alt="profile image"
+      />
+      <img
+        *ngIf="!imageSrc && !previewImage"
+        src="../../../../assets/images/user-solid.svg"
+        alt="profile image"
+      />
+      <img *ngIf="previewImage" [src]="previewImage" alt="profile image" />
     </div>
     <div class="profile-username">
       <h1>Welcome {{ adminForm.get("username")?.value }}</h1>
@@ -67,12 +77,7 @@
             (change)="onFileChange($event)"
           >
             <i class="fa-solid fa-image"></i>&nbsp;{{ selectedFileName }}
-            <input
-              type="file"
-              id="profilePicture"
-              class="file-input"
-              formControlName="profilePicture"
-            />
+            <input type="file" id="profilePicture" class="file-input" />
           </label>
           <span
             class="form-helper"
